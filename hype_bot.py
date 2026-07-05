@@ -11,6 +11,9 @@ def main():
     token = os.getenv("TELEGRAM_TOKEN")
     print("TOKEN CARGADO:", token)
 
+    if not token:
+        raise Exception("TELEGRAM_TOKEN no está definido en Railway")
+
     app = ApplicationBuilder().token(token).build()
 
     app.add_handler(CommandHandler("start", start))
