@@ -306,7 +306,10 @@ def analisis_completo(version="completa"):
     else:
         score_final = round(e1_score*0.40 + e2_score*0.35 + e3_score*0.25)
 
-    if score_final >= 68:   decision = "🟢 ENTRAR LONG"
+    # Regla de seguridad: si confirmación < 50% nunca se puede dar señal de entrada
+    if e3_score < 50:
+        decision = "⏳ ESPERAR — confirmación insuficiente"
+    elif score_final >= 68:   decision = "🟢 ENTRAR LONG"
     elif score_final >= 60: decision = "🟡 PREPARAR LONG"
     elif score_final <= 32: decision = "🔴 CONSIDERAR SHORT"
     elif score_final <= 40: decision = "🟡 PREPARAR SHORT"
